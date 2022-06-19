@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Text = ({text = '123', defaultParameter = 0}) => {
+const Text = ({text = 'error', defaultParameter = 0}) => {
     const [counter, setCounter] = useState(defaultParameter);
     const onChange = ( increment ) => {
         setCounter(counter + increment);
