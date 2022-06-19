@@ -19,7 +19,7 @@ const downloadImage = (blob, fileName) => {
   fakeLink.remove();
 };
 
-const Capture = ({ img, textTop, textBottom }) => {
+const Capture = ({ img, textTop, textBottom, color }) => {
   const ref = useRef(null);
 
   return (
@@ -28,9 +28,9 @@ const Capture = ({ img, textTop, textBottom }) => {
         ref={ref}
         style={{
           backgroundImage: `url(${img})`,
-          backgroundSize: "cover",
+          backgroundSize: "auto",
           position: "relative",
-          width: 400,
+          width: 600,
           height: 600,
           backgroundRepeat: "no-repeat",
           display: "flex",
@@ -38,8 +38,8 @@ const Capture = ({ img, textTop, textBottom }) => {
           flexDirection: "column",
         }}
       >
-        <p style={{ zIndex: 1, color: 'black' }}>{textTop}</p>
-        <p style={{ zIndex: 1, color: 'black'}}>{textBottom}</p>
+        <p style={{ zIndex: 1, color: color }}>{textTop}</p>
+        <p style={{ zIndex: 1, color: color }}>{textBottom}</p>
       </div>
       <button onClick={() => exportAsImage(ref.current, "test")}>
         Click me
