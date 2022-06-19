@@ -23,7 +23,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {preview ? <h1>defined</h1> : <h2>not defined</h2>}
         {preview ? (
           <Capture img={preview} textTop={text1} textBottom={text2} />
         ) : (
