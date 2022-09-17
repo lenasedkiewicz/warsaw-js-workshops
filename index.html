@@ -23,8 +23,8 @@
             </h1>
             <nav>
                 <ul>
-                    <li data-page="current-exchange">
-                        Current exchange rate
+                    <li data-page="exchange-rates">
+                        Exchange rate
                     </li>
                     <li data-page="investor-calculator">
                         Investor calculator
@@ -36,10 +36,19 @@
             </nav>
         </div>
     </header>
-    <div class="page" id="current-exchange">
+    <div class="page" id="exchange-rates">
         <div class="content">
-            <h1>Current exchange rate</h1>
-            <table id="current_exchange_rate">
+            <h1>Exchange rate</h1>
+            <input id="exchange-rate-date" type="date" />
+            <script>
+                (()=>{
+                        const local = new Date();
+                        local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+                        document.getElementById('exchange-rate-date').value = local.toJSON().slice(0,10);
+                })()
+                
+            </script>
+            <table id="exchange_rate">
                 <tbody>
                     <tr>
                         <th>
@@ -116,7 +125,7 @@
     </div>
     <div class="page" id="track-saving">
         <div class="content">
-            <h1>Tracking saving</h1>
+            <h1>My savings</h1>
             <form id="tracking_saving_form">
                 <fieldset>
                     <h2>Add information about your savings</h2>
@@ -204,5 +213,6 @@
         </div>
     </div>
     <script src="./navigation.js"></script>
+    <script src="./helpers.js"></script>
 </body>
 </html>
