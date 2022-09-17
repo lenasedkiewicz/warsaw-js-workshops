@@ -11,7 +11,7 @@ navigationLinks.forEach(link=>{
     })
 })
 
-//hide all pages except first
+// hide all pages except first
 allPages.forEach((page, index)=>{
     if(index===0){
         return;

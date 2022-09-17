@@ -39,7 +39,7 @@
     <div class="page" id="current-exchange">
         <div class="content">
             <h1>Current exchange rate</h1>
-            <table>
+            <table id="current_exchange_rate">
                 <tbody>
                     <tr>
                         <th>
@@ -64,7 +64,7 @@
     <div class="page" id="investor-calculator">
         <div class="content">
             <h1>Investor calculator</h1>
-            <form>
+            <form id="investor_calculator_form">
                 <fieldset>
                     <h2>Tell us more details</h2>
                     <div>
@@ -78,7 +78,7 @@
                         </label>
                         <label class="withCheckbox">
                             Show path to become rich
-                            <input type="checkbox" name="theBestResult" />
+                            <input type="checkbox" name="theBestResult" value="true" />
                         </label>
                         <button>
                             Make calculation
@@ -86,7 +86,7 @@
                     </div>
                 </fieldset>
             </form>
-            <table class="firstColumnSticky">
+            <table class="firstColumnSticky" id="investor_calculator">
                 <tbody>
                     <tr>
                         <th>
@@ -117,21 +117,21 @@
     <div class="page" id="track-saving">
         <div class="content">
             <h1>Tracking saving</h1>
-            <form>
+            <form id="tracking_saving_form">
                 <fieldset>
                     <h2>Add information about your savings</h2>
                     <div>
                         <label>
                             How much you saved
-                            <input type="number" value="1000" name="howMuchYouInvested" />
+                            <input type="number" value="1000" name="howMuchYouSaved" />
                         </label>
                         <label>
                             When
-                            <input type="date" name="howManyMonths" />
+                            <input type="date" name="dateOfInvestment" />
                         </label>
                         <label>
                             Which currency
-                           <select>
+                           <select name="currency">
                                 <option>
                                     PLN
                                 </option>
@@ -152,7 +152,7 @@
                     </div>
                 </fieldset>
             </form>
-            <table>
+            <table id="tracking_savings_form">
                 <tbody>
                     <tr>
                         <th>
@@ -187,15 +187,15 @@
                             Score
                         </td>
                         <td>
-                            Totally invested in PLN
-                            <span>20</span>
+                            Totally invested PLN
+                            <span id="sum_totally_invested">20</span>
                         </td>
                         <td>
                             Current value in PLN
-                            <span>25</span>
+                            <span id="current_value_in_pln">25</span>
                         </td>
                         <td>
-                            % of diffrence
+                            % of difference
                             <span>25%</span>
                         </td>
                     </tr>
