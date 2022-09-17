@@ -16,7 +16,7 @@ function getRandomInt(min, max) {
 
 app.get('/api/array', async (req, res)=> {
     const size = parseInt(req.query.size || 1000);
-    const generatedArray = Array.from({length: size}).map(()=>getRandomInt(-1000000, -1000000));
+    const generatedArray = Array.from({length: size}).map(()=>getRandomInt(-1000000, 1000000));
     res.status(200);
     res.set('Content-Type', "application/json; charset=utf-8");
     res.send({ data: generatedArray });
