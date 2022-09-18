@@ -26,10 +26,11 @@ allPages.forEach((page, index) => {
   page.style.display = "none";
 });
 
-
+function sortTheArray(){
 fetch('http://localhost:3000/api/array?size=100000').then(function(res){return res.json()}).then(function(data){
     const array = data.data;
     console.log('I got data');
     array.sort(function(a,b){return a-b})
     console.log('i did sorting');
 })
+}
