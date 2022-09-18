@@ -8,14 +8,7 @@ navigationLinks.forEach(link=>{
         })
         const pageActive = e.target.dataset.page;
         console.log(pageActive);
-        localStorage.setItem('pageActive', pageActive)
-        // if (pageActive.includes(track-saving)) {
-        //     localStorage.setItem('pageActive', 'track-saving')
-        // } else if (pageActive.includes(investor-calculator)) {
-        //     localStorage.setItem('pageActive', 'investor-calculator')
-        // } else if (pageActive.includes(exchange-rates)) {
-        //     localStorage.setItem('pageActive', 'exchange-rates')
-        // }
+        sessionStorage.setItem('pageActive', pageActive)
         document.querySelector(`#${pageActive}`).style.display = "block";
     })
 })
