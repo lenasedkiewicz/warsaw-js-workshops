@@ -1,22 +1,27 @@
-const navigationLinks = document.querySelectorAll('li[data-page]');
-const allPages = document.querySelectorAll('.page');
+const navigationLinks = document.querySelectorAll("li[data-page]");
+const allPages = document.querySelectorAll(".page");
 
-navigationLinks.forEach(link=>{
-    link.addEventListener('click', (e)=>{
-        allPages.forEach(page=>{
-            page.style.display = "none";
-        })
-        const pageActive = e.target.dataset.page;
-        console.log(pageActive);
-        sessionStorage.setItem('pageActive', pageActive)
-        document.querySelector(`#${pageActive}`).style.display = "block";
-    })
-})
+navigationLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    allPages.forEach((page) => {
+      page.style.display = "none";
+    });
+    const pageActive = e.target.dataset.page;
+    // console.log(pageActive);
+    sessionStorage.setItem("pageActive", pageActive);
+    document.querySelector(`#${pageActive}`).style.display = "block";
+  });
+});
 
-// hide all pages except first
-allPages.forEach((page, index)=>{
-    if(index===0){
-        return;
+allPages.forEach((page, index) => {
+  if (sessionStorage.getItem("pageActive")) {
+    if (page.id === sessionStorage.getItem("pageActive")) {
+      return;
     }
-    page.style.display = "none";
-})
+  } else {
+    if (index === 0) {
+      return;
+    }
+  }
+  page.style.display = "none";
+});
