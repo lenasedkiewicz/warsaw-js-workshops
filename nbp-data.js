@@ -42,7 +42,7 @@ function getRatesForSpecificDate(date, numberOfRetry = 0) {
 
 const date = "2021-11-01";
 getRatesForSpecificDate(date).then((rates) => {
-  console.log(rates);
+  // console.log(rates);
   for (let i = 0; i < rates.length; i++) {
     appendRow("exchange_rate", [rates[i].currency, rates[i].mid]);
   }
