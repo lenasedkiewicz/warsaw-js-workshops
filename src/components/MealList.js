@@ -11,7 +11,7 @@ const MealList = ({ meals, onSelect }) => (
   </Item.Group>
 );
 
-export default MealList;
+export default React.memo(MealList);
 
 MealList.propTypes = {
   meals: PropTypes.arrayOf(PropTypes.object),

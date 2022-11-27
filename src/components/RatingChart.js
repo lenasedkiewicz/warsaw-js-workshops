@@ -62,7 +62,7 @@ RatingChart.defaultProps = {
   onSelect: undefined,
 };
 
-export default React.memo(RatingChart);
+export default RatingChart;
 
 const CustomTooltip = (props) => {
   const { active, payload } = props;

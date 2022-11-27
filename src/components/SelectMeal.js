@@ -1,45 +1,57 @@
-import * as React from 'react';
-import { Divider } from 'semantic-ui-react';
+import * as React from "react";
+import { Divider } from "semantic-ui-react";
 
-import Filters from './Filters';
-import MealList from './MealList';
-import ChartToggler from './ChartToggler';
-import RatingChart from './RatingChart';
+import Filters from "./Filters";
+import MealList from "./MealList";
+import ChartToggler from "./ChartToggler";
+import RatingChart from "./RatingChart";
 
-import { FILTER_OPTIONS } from '../commons/const';
-import axios from 'axios';
-import { useQuery } from 'react-query';
-import * as utils from '../commons/utils';
+import { FILTER_OPTIONS } from "../commons/const";
+import axios from "axios";
+import { useQuery } from "react-query";
+import * as utils from "../commons/utils";
 
 const SelectMeal = (props) => {
   const [chartVisible, chartToggler] = useToggle();
-  const { isLoading, error, data = [] } = useQuery("dataMeals", () =>{
-    return axios("/api/meals").then(({data}) => data)
-    });
+  const {
+    isLoading,
+    error,
+    data = [],
+  } = useQuery("dataMeals", () => {
+    return axios("/api/meals").then(({ data }) => data);
+  });
   const [filters, setFilters] = React.useState({});
   const onFiltersChange = (filterId, isSelected) => {
-    setFilters((state)=> {
+    setFilters((state) => {
       return {
         ...state,
         [filterId]: isSelected,
-      }
+      };
     });
-  }
-  const count = utils.countMealsByBedType(data)
-  const filteredData = utils.applyFilter(filters, data);
+  };
+  const count = utils.countMealsByBedType(data);
+  // const filteredData = utils.applyFilter(filters, data);
+
+  const filteredData = React.useMemo(() => {
+    return utils.applyFilter(filters, data);
+  }, [data, filters]);
 
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
 
   return (
     <React.Fragment>
-      <ChartToggler isVisible={chartVisible} onChange={chartToggler}/>
+      <ChartToggler isVisible={chartVisible} onChange={chartToggler} />
       <Divider hidden />
       {chartVisible && <RatingChart data={data} />}
       <Divider />
-      <Filters options={FILTER_OPTIONS} onChange={onFiltersChange} count={count} />
+      <Filters
+        options={FILTER_OPTIONS}
+        onChange={onFiltersChange}
+        count={count}
+      />
       <Divider />
-      {isLoading ? 'Loading..' : <MealList meals={filteredData}/> }
+      {isLoading ? "Loading.." : <MealList meals={filteredData} />}
       <Divider hidden></Divider>
     </React.Fragment>
   );
@@ -50,7 +62,7 @@ export default SelectMeal;
 const useToggle = () => {
   const [value, setValue] = React.useState(true);
   const toggleValue = () => {
-    setValue(!value)
+    setValue(!value);
   };
-  return [value, toggleValue]
-}
+  return [value, toggleValue];
+};
