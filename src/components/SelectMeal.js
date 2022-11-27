@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Divider } from "semantic-ui-react";
+import { Divider, Loader } from "semantic-ui-react";
 
 import Filters from "./Filters";
 import MealList from "./MealList";
@@ -24,13 +24,16 @@ const SelectMeal = (props) => {
     });
   });
   const [filters, setFilters] = React.useState({});
+
+  const [isPending, setTransition] = React.useTransition();
+
   const onFiltersChange = (filterId, isSelected) => {
-    setFilters((state) => {
+    setTransition(() => setFilters((state) => {
       return {
         ...state,
         [filterId]: isSelected,
       };
-    });
+    }));
   };
   const count = utils.countMealsByBedType(data);
   // const filteredData = utils.applyFilter(filters, data);
@@ -57,6 +60,7 @@ const SelectMeal = (props) => {
         onChange={onFiltersChange}
         count={count}
       />
+      {isPending && <Loader active size="mini" inline />}
       <Divider />
       {isLoading ? "Loading.." : <MealList meals={filteredData} />}
       <Divider hidden></Divider>
