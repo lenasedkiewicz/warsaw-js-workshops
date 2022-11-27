@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Item, Label, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import MealSizeWithHOC from './MealSize';
+import VanillaTilt from 'vanilla-tilt';
 
 const MealList = ({ meals, onSelect }) => (
   <Item.Group divided>
@@ -25,7 +26,9 @@ MealList.defaultProps = {
 
 const MealCard = (props) => {
   const { meal, onSelect } = props;
+  const tiltRef = React.useRef();
 
+  React.useEffect(() => VanillaTilt.init(tiltRef.current, { max: 25, speed: 400, scale: 1.1 }), []);
   return (
     <Item>
       <Item.Image
@@ -40,7 +43,7 @@ const MealCard = (props) => {
           {meal.location.address} (dostawa {meal.location.delivery} min)
         </Item.Meta>
         <Item.Description style={{ minHeight: '76px' }}>
-          <div style={{ float: 'right' }}>
+          <div style={{ float: 'right' }} ref={tiltRef}>
             <Label tag size={'huge'}>
               {meal.price.amount} zł
             </Label>
