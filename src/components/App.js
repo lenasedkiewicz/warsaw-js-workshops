@@ -1,11 +1,16 @@
-import PageContent from './PageContent';
-import NavBar from './NavBar';
+import PageContent from "./PageContent";
+import NavBar from "./NavBar";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div>
-      <NavBar />
-      <PageContent />
+      <QueryClientProvider client={queryClient}>
+        <NavBar />
+        <PageContent />
+      </QueryClientProvider>
     </div>
   );
 }

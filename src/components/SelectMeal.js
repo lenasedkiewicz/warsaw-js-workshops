@@ -8,18 +8,26 @@ import RatingChart from './RatingChart';
 
 import { FILTER_OPTIONS } from '../commons/const';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 const SelectMeal = (props) => {
-  const [data, setData] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(true);
+  // const [data, setData] = React.useState([])
+  // const [isLoading, setIsLoading] = React.useState(true);
   const [chartVisible, chartToggler] = useToggle();
 
-  React.useEffect(() => {
-    axios('/api/meals').then(({data})=>{
-      setData(data)
-      setIsLoading(false)
-    })
-  }, [])
+  // React.useEffect(() => {
+  //   axios('/api/meals').then(({data})=>{
+  //     setData(data)
+  //     setIsLoading(false)
+  //   })
+  // }, [])
+  const { isLoading, error, data } = useQuery("dataMeals", () =>{
+    return axios("/api/meals").then(({data}) => data)
+    });
+
+  if (isLoading) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
+
 
   return (
     <React.Fragment>
