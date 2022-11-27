@@ -27,15 +27,15 @@ const SelectMeal = (props) => {
 
   const [isPending, setTransition] = React.useTransition();
 
-  const onFiltersChange = (filterId, isSelected) => {
+  const onFiltersChange = React.useCallback((filterId, isSelected) => {
     setTransition(() => setFilters((state) => {
       return {
         ...state,
         [filterId]: isSelected,
       };
     }));
-  };
-  const count = utils.countMealsByBedType(data);
+  }, []);
+  const count = React.useMemo(()=>utils.countMealsByBedType(data), [data]);
   // const filteredData = utils.applyFilter(filters, data);
 
   const filteredData = React.useMemo(() => {
