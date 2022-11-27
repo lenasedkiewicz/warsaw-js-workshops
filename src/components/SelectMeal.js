@@ -36,7 +36,7 @@ const SelectMeal = (props) => {
     return utils.applyFilter(filters, data);
   }, [data, filters]);
 
-  const RatingChart = lazy(() => import("./RatingChart"));
+  const RatingChart = lazyWithPreload(() => import("./RatingChart"));
 
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
@@ -68,3 +68,9 @@ const useToggle = () => {
   };
   return [value, toggleValue];
 };
+
+function lazyWithPreload(factory) {
+  const Component = React.lazy(factory);
+  Component.preload = factory;
+  return Component;
+}
