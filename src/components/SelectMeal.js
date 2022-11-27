@@ -12,11 +12,7 @@ import * as utils from '../commons/utils';
 const SelectMeal = (props) => {
   const data = [];
   const chartData = utils.prepareChartData(data);
-  const [chartVisible, setChartVisible] = React.useState(false);
-
-  const chartToggler = () => {
-    setChartVisible(!chartVisible);
-  }
+  const [chartVisible, chartToggler] = useToggle();
 
 
   return (
@@ -34,3 +30,11 @@ const SelectMeal = (props) => {
 };
 
 export default SelectMeal;
+
+const useToggle = () => {
+  const [value, setValue] = React.useState(true);
+  const toggleValue = () => {
+    setValue(!value)
+  };
+  return [value, toggleValue]
+}
