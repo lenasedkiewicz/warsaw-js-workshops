@@ -12,12 +12,18 @@ import * as utils from '../commons/utils';
 const SelectMeal = (props) => {
   const data = [];
   const chartData = utils.prepareChartData(data);
+  const [chartVisible, setChartVisible] = React.useState(false);
+
+  const chartToggler = () => {
+    setChartVisible(!chartVisible);
+  }
+
 
   return (
     <React.Fragment>
-      <ChartToggler />
+      <ChartToggler isVisible={chartVisible} onChange={chartToggler}/>
       <Divider hidden />
-      <RatingChart data={chartData} />
+      {chartVisible && <RatingChart data={chartData} />}
       <Divider />
       <Filters options={FILTER_OPTIONS} />
       <Divider />
