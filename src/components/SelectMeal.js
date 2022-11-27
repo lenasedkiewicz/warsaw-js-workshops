@@ -9,16 +9,27 @@ import RatingChart from './RatingChart';
 import { FILTER_OPTIONS } from '../commons/const';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import * as utils from '../commons/utils';
 
 const SelectMeal = (props) => {
   const [chartVisible, chartToggler] = useToggle();
-  const { isLoading, error, data } = useQuery("dataMeals", () =>{
+  const { isLoading, error, data = [] } = useQuery("dataMeals", () =>{
     return axios("/api/meals").then(({data}) => data)
     });
+  const [filters, setFilters] = React.useState({});
+  const onFiltersChange = (filterId, isSelected) => {
+    setFilters((state)=> {
+      return {
+        ...state,
+        [filterId]: isSelected,
+      }
+    });
+  }
+  const count = utils.countMealsByBedType(data)
+  const filteredData = utils.applyFilter(filters, data);
 
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
-
 
   return (
     <React.Fragment>
@@ -26,9 +37,9 @@ const SelectMeal = (props) => {
       <Divider hidden />
       {chartVisible && <RatingChart data={data} />}
       <Divider />
-      <Filters options={FILTER_OPTIONS} />
+      <Filters options={FILTER_OPTIONS} onChange={onFiltersChange} count={count} />
       <Divider />
-      {isLoading ? 'Loading..' : <MealList meals={data}/> }
+      {isLoading ? 'Loading..' : <MealList meals={filteredData}/> }
       <Divider hidden></Divider>
     </React.Fragment>
   );
