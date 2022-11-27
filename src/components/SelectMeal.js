@@ -4,12 +4,12 @@ import { Divider } from "semantic-ui-react";
 import Filters from "./Filters";
 import MealList from "./MealList";
 import ChartToggler from "./ChartToggler";
-import RatingChart from "./RatingChart";
 
 import { FILTER_OPTIONS } from "../commons/const";
 import axios from "axios";
 import { useQuery } from "react-query";
 import * as utils from "../commons/utils";
+import { lazy } from "react";
 
 const SelectMeal = (props) => {
   const [chartVisible, chartToggler] = useToggle();
@@ -36,6 +36,8 @@ const SelectMeal = (props) => {
     return utils.applyFilter(filters, data);
   }, [data, filters]);
 
+  const RatingChart = lazy(() => import("./RatingChart"));
+
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
 
@@ -43,7 +45,7 @@ const SelectMeal = (props) => {
     <React.Fragment>
       <ChartToggler isVisible={chartVisible} onChange={chartToggler} />
       <Divider hidden />
-      {chartVisible && <RatingChart data={data} />}
+      <React.Suspense fallback={<span>Ładowanie</span>}>{chartVisible && <RatingChart data={data} />}</React.Suspense>
       <Divider />
       <Filters
         options={FILTER_OPTIONS}
@@ -60,7 +62,7 @@ const SelectMeal = (props) => {
 export default SelectMeal;
 
 const useToggle = () => {
-  const [value, setValue] = React.useState(true);
+  const [value, setValue] = React.useState(false);
   const toggleValue = () => {
     setValue(!value);
   };
