@@ -14,7 +14,7 @@ import {
 
 import * as utils from '../commons/utils';
 const RatingChart = ({ data, onSelect }) => {
-  const chartData = () => utils.prepareChartData(data);
+  const chartData = utils.prepareChartData(data);
 
   return (
     <ResponsiveContainer height={200}>

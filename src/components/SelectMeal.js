@@ -8,18 +8,27 @@ import RatingChart from './RatingChart';
 
 import { FILTER_OPTIONS } from '../commons/const';
 import * as utils from '../commons/utils';
+import axios from 'axios';
 
 const SelectMeal = (props) => {
-  const data = [];
+  const [data, setData] = React.useState([])
+  const [loading, setIsLoading] = React.useState(true);
+
   const chartData = utils.prepareChartData(data);
   const [chartVisible, chartToggler] = useToggle();
 
+  React.useEffect(() => {
+    axios('/data.json').then(({data})=>{
+      setData(data)
+      setIsLoading(false)
+    })
+  }, [])
 
   return (
     <React.Fragment>
       <ChartToggler isVisible={chartVisible} onChange={chartToggler}/>
       <Divider hidden />
-      {chartVisible && <RatingChart data={chartData} />}
+      {chartVisible && <RatingChart data={data} />}
       <Divider />
       <Filters options={FILTER_OPTIONS} />
       <Divider />
