@@ -49,7 +49,7 @@ const SelectMeal = (props) => {
       <ChartToggler isVisible={chartVisible} onChange={chartToggler} />
       <Divider hidden />
       <React.Suspense fallback={<span>Ładowanie</span>}>
-        {chartVisible && <RatingChart data={data} />}
+        {chartVisible && <RatingChart data={filteredData} />}
       </React.Suspense>
       <Divider />
       <Filters

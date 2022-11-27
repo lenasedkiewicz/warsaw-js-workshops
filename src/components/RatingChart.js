@@ -14,7 +14,10 @@ import {
 
 import * as utils from '../commons/utils';
 const RatingChart = ({ data, onSelect }) => {
-  const chartData = utils.prepareChartData(data);
+  // console.log({data})
+  const deferredData = React.useDeferredValue(data);
+  // console.log({ deferredData })
+  const chartData = React.useMemo(() => utils.prepareChartData(deferredData), [deferredData]);
 
   return (
     <ResponsiveContainer height={200}>
@@ -62,7 +65,7 @@ RatingChart.defaultProps = {
   onSelect: undefined,
 };
 
-export default RatingChart;
+export default React.memo(RatingChart);
 
 const CustomTooltip = (props) => {
   const { active, payload } = props;
