@@ -9,7 +9,7 @@ import { FILTER_OPTIONS } from "../commons/const";
 import axios from "axios";
 import { useQuery } from "react-query";
 import * as utils from "../commons/utils";
-import { lazy } from "react";
+// import { lazy } from "react";
 
 const SelectMeal = (props) => {
   const [chartVisible, chartToggler] = useToggle();
@@ -18,7 +18,10 @@ const SelectMeal = (props) => {
     error,
     data = [],
   } = useQuery("dataMeals", () => {
-    return axios("/api/meals").then(({ data }) => data);
+    return axios("/api/meals").then(({ data }) => {
+      RatingChart.preload();
+      return data;
+    });
   });
   const [filters, setFilters] = React.useState({});
   const onFiltersChange = (filterId, isSelected) => {
@@ -45,7 +48,9 @@ const SelectMeal = (props) => {
     <React.Fragment>
       <ChartToggler isVisible={chartVisible} onChange={chartToggler} />
       <Divider hidden />
-      <React.Suspense fallback={<span>Ładowanie</span>}>{chartVisible && <RatingChart data={data} />}</React.Suspense>
+      <React.Suspense fallback={<span>Ładowanie</span>}>
+        {chartVisible && <RatingChart data={data} />}
+      </React.Suspense>
       <Divider />
       <Filters
         options={FILTER_OPTIONS}
