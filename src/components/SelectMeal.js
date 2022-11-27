@@ -7,14 +7,11 @@ import ChartToggler from './ChartToggler';
 import RatingChart from './RatingChart';
 
 import { FILTER_OPTIONS } from '../commons/const';
-import * as utils from '../commons/utils';
 import axios from 'axios';
 
 const SelectMeal = (props) => {
   const [data, setData] = React.useState([])
-  const [loading, setIsLoading] = React.useState(true);
-
-  const chartData = utils.prepareChartData(data);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [chartVisible, chartToggler] = useToggle();
 
   React.useEffect(() => {
@@ -32,7 +29,7 @@ const SelectMeal = (props) => {
       <Divider />
       <Filters options={FILTER_OPTIONS} />
       <Divider />
-      <MealList />
+      {isLoading ? 'Loading..' : <MealList meals={data}/> }
       <Divider hidden></Divider>
     </React.Fragment>
   );
