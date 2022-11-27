@@ -15,7 +15,7 @@ const SelectMeal = (props) => {
   const [chartVisible, chartToggler] = useToggle();
 
   React.useEffect(() => {
-    axios('/data.json').then(({data})=>{
+    axios('/api/meals').then(({data})=>{
       setData(data)
       setIsLoading(false)
     })
