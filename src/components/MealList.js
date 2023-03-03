@@ -28,7 +28,13 @@ const MealCard = (props) => {
   const { meal, onSelect } = props;
   const tiltRef = React.useRef();
 
-  React.useEffect(() => VanillaTilt.init(tiltRef.current, { max: 25, speed: 400, scale: 1.1 }), []);
+  React.useEffect(() => {
+    VanillaTilt.init(tiltRef.current, { max: 25, speed: 400, scale: 1.1 });
+    const node = tiltRef.current;
+    return () => {
+      node.VanillaTilt.destroy();
+    };
+  }, []);
   return (
     <Item>
       <Item.Image
