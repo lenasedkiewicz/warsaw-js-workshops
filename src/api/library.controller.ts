@@ -4,6 +4,7 @@ import { AddingBook } from 'src/use-cases/adding-book';
 import { AddingBookInstance } from 'src/use-cases/adding-book-instance';
 import { CancelingHold } from 'src/use-cases/canceling-hold';
 import { PlacingOnHold } from 'src/use-cases/placing-on-hold';
+import { RemovingBookInstance } from 'src/use-cases/removing-book-instance';
 
 @Controller()
 export class LibraryController {
@@ -12,6 +13,7 @@ export class LibraryController {
     private readonly addingBookInstance: AddingBookInstance,
     private readonly cancelingHold: CancelingHold,
     private readonly placingOnHold: PlacingOnHold,
+    private readonly removingBookInstance: RemovingBookInstance,
   ) {}
 
   @Get('add-book/:isbn/:title/:author')
