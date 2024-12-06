@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="loader" class="hide">
+        <div id="loaderCircle"></div>
+        <h1>I am loading data, please wait</h1>
+    </div>
+    <header>
+        <div class="content">
+            <h1>
+                Smarter with time
+            </h1>
+            <nav>
+                <ul>
+                    <li data-page="exchange-rates">
+                        Exchange rate
+                    </li>
+                    <li data-page="investor-calculator">
+                        Investor calculator
+                    </li>
+                    <li data-page="track-saving">
+                        My savings
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="page" id="exchange-rates">
+        <div class="content">
+            <h1>Exchange rate</h1>
+            <input id="exchange-rate-date" type="date" />
+            <script>
+                (()=>{
+                        const local = new Date();
+                        local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+                        document.getElementById('exchange-rate-date').value = local.toJSON().slice(0,10);
+                })()
+                
+            </script>
+            <table id="exchange_rate">
+                <tbody>
+                    <tr>
+                        <th>
+                            Currency
+                        </th>
+                        <th>
+                            Price in PLN
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Euro
+                        </td>
+                        <td>
+                            25zł
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page" id="investor-calculator">
+        <div class="content">
+            <h1>Investor calculator</h1>
+            <form id="investor_calculator_form">
+                <fieldset>
+                    <h2>Tell us more details</h2>
+                    <div>
+                        <label>
+                            How much you invested
+                            <input type="number" value="1000" name="howMuchYouInvested" />
+                        </label>
+                        <label>
+                            How many months
+                            <input type="number" value="6" name="howManyMonths" />
+                        </label>
+                        <label class="withCheckbox">
+                            Show path to become rich
+                            <input type="checkbox" name="theBestResult" value="true" />
+                        </label>
+                        <button>
+                            Make calculation
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+            <table class="firstColumnSticky" id="investor_calculator">
+                <tbody>
+                    <tr>
+                        <th>
+                            Currency of account
+                        </th>
+                        <th>
+                            Value at the begging
+                        </th>
+                        <th>
+                            Value at the end
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            USD
+                        </td>
+                        <td>
+                            20zł
+                        </td>
+                        <td>
+                            20zł
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page" id="track-saving">
+        <div class="content">
+            <h1>My savings</h1>
+            <form id="tracking_saving_form">
+                <fieldset>
+                    <h2>Add information about your savings</h2>
+                    <div>
+                        <label>
+                            How much you saved
+                            <input type="number" value="1000" name="howMuchYouSaved" />
+                        </label>
+                        <label>
+                            When
+                            <input type="date" name="dateOfInvestment" />
+                        </label>
+                        <label>
+                            Which currency
+                           <select name="currency">
+                                <option>
+                                    PLN
+                                </option>
+                                <option>
+                                    USD
+                                </option>
+                                <option>
+                                    EURO
+                                </option>
+                                <option>
+                                    ...
+                                </option>
+                            </select>
+                        </label>
+                        <button>
+                            Add
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+            <table id="tracking_savings_form">
+                <tbody>
+                    <tr>
+                        <th>
+                            Date of payment
+                        </th>
+                        <th>
+                            Currency of investment
+                        </th>
+                        <th>
+                            Value when invested
+                        </th>
+                        <th>
+                            Current value
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            2022-11-05
+                        </td>
+                        <td>
+                            USD
+                        </td>
+                        <td>
+                            20zł
+                        </td>
+                        <td>
+                            25zł
+                        </td>
+                    </tr>
+                    <tr class="footer">
+                        <td>
+                            Score
+                        </td>
+                        <td>
+                            Totally invested PLN
+                            <span id="sum_totally_invested">20</span>
+                        </td>
+                        <td>
+                            Current value in PLN
+                            <span id="current_value_in_pln">25</span>
+                        </td>
+                        <td>
+                            % of difference
+                            <span>25%</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./navigation.js"></script>
+    <script src="./helpers.js"></script>
+    <script src="./nbp-data.js"></script>
+</body>
+</html>

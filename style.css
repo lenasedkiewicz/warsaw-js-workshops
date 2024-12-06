@@ -1,0 +1,333 @@
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;  
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+/* custom css */
+
+#loader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    animation-fill-mode: forwards;
+    flex-direction: column;
+    z-index: 25;
+}
+
+#loader h1 {
+    margin-top: 35px;
+    font-size: 35px;
+    font-weight: 300;
+}
+
+#loader.hide{
+    display: none;
+    animation-name: hideAnimation;
+    animation-duration: 450ms;
+}
+
+#loaderCircle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, transparent, transparent 40%, #e5f403);
+    animation: animateLoader 2s linear infinite;
+  }
+  
+#loaderCircle::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    bottom: 6px;
+    right: 6px;
+    background: #fff;
+    border-radius: 50%;
+    z-index: 1000;
+  }
+  
+#loaderCircle::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: linear-gradient(45deg, transparent, transparent 40%, #e5f403);
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+  }
+  
+  @keyframes animateLoader {
+    0% {
+      transform: rotate(0deg);
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+      filter: hue-rotate(360deg);
+    }
+  }
+  
+
+body {
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+header {
+    background: linear-gradient(180deg, rgba(112,106,200,1) 0%, rgba(190,189,208,1) 100%);
+    color: #fff;
+    padding: 15px 0;
+}
+header .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    font-size: 30px;
+}
+header nav ul{
+    display: flex;
+}
+header nav ul li {
+    margin-left: 30px;
+    cursor: pointer;
+}
+.content {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+.page {
+    padding: 40px 0;
+}
+.page h1,
+.page h2{
+    font-size: 30px;
+    font-weight: 400;
+    display: inline-block;
+    border-bottom: 2px solid #000;
+    padding-right: 20px;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+}
+.page h2 {
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+}
+table tbody {
+    position: relative;
+}
+table tbody tr:first-child{
+    position: sticky;
+    top: 0;
+}
+table tbody th {
+    text-align: left;
+    padding: 15px;
+    color: #fff;
+    background: #5449ff;
+}
+table tbody td,
+table tbody{
+    text-align: left;
+    border: 1px solid #000;
+    padding: 15px;
+}
+table tbody tr.footer td{
+    color: #5449ff;
+}
+table tbody tr.footer td span{
+    display: block;
+    font-weight: bold;
+    font-size: 30px;
+}
+table tbody .footer td:first-child{
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+}
+table.firstColumnSticky {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+table.firstColumnSticky  tr:not(:first-child){
+    position: relative;
+}
+table.firstColumnSticky td:first-child{
+    position: sticky;
+    left: 0;
+    background: #57538c;
+    color: #fff;
+}
+
+table tbody tr:hover{
+    background: rgba(84,73,255,0.3);
+}
+fieldset {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+fieldset div {
+    display: flex;
+}
+fieldset input[type=number],
+fieldset input[type=date],
+fieldset select{
+    margin-top: 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 8px;
+}
+fieldset label{
+    width: 25%;
+    display: flex;
+    padding-right: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+fieldset label.withCheckbox {
+    flex-direction: row;
+    align-items: end;
+    padding-bottom: 9px;
+    font-size: 20px;
+}
+fieldset label.withCheckbox input {
+    margin-left: 5px;
+}
+fieldset button {
+    background: #57538c;
+    color: #fff;
+    margin-left: auto;
+    border-radius: 10px;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+}
+#exchange-rate-date {
+    border: 1px solid #5449ff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+@keyframes hideAnimation {
+    0% {opacity: 1;}
+    99% {opacity: 0;}
+    100% {opacity: 0; display: none;}
+  }
